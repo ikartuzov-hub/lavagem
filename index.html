@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>nLm — agenda cheia para lavagens</title>
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-title" content="nLm">
+<meta name="description" content="Marcação online, lista de espera no WhatsApp e extras vendidos durante a lavagem. Para lavagens da Madeira que trabalham ao telefone.">
+<link rel="canonical" href="https://lavagem.seedwave.pt/">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="nLm · SeedWave">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:title" content="nLm — encha a agenda. Depois cresça.">
+<meta property="og:description" content="Marcação online, lista de espera no WhatsApp e extras vendidos enquanto o carro já está consigo. 30 €/mês para as primeiras dez lavagens.">
+<meta property="og:image" content="https://lavagem.seedwave.pt/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://lavagem.seedwave.pt/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="nLm — encha a agenda. Depois cresça.">
+<meta name="twitter:description" content="Marcação, lista de espera e extras para lavagens da Madeira.">
+<meta name="twitter:image" content="https://lavagem.seedwave.pt/og-image.jpg">
+</head>
+<body>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Lato:wght@400;700&display=swap');
+
+:root{
+  --bg:#0b1220; --bg2:#131e31; --bg3:#0e1728;
+  --ink:#eef4fb; --muted:#8b9cb3; --line:#22304a;
+  --accent:#f0b429; --accent-ink:#1a1206; --mag:#e0479b; --cyan:#5cc8f5; --ok:#3ecf8e;
+  --shadow:0 10px 34px rgba(0,0,0,.45); --radius:18px;
+}
+:root[data-theme="light"]{
+  --bg:#f4f7fb; --bg2:#ffffff; --bg3:#eef3f9;
+  --ink:#101a2b; --muted:#5b6b80; --line:#dde5f0;
+  --accent:#b8790a; --accent-ink:#fff; --mag:#c0247c; --cyan:#1668b8; --ok:#1f8a5c;
+  --shadow:0 6px 22px rgba(20,40,70,.10);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Lato,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Poppins,Lato,sans-serif;font-weight:600;letter-spacing:-.015em}
+.wrap{max-width:620px;margin:0 auto;padding:0 20px}
+
+.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top-in{max-width:620px;margin:0 auto;padding:9px 20px;display:flex;align-items:center;gap:10px}
+.mark{display:flex;align-items:center;gap:9px;font-family:Poppins;font-weight:700;font-size:15px;letter-spacing:.02em}
+.spacer{flex:1}
+.rbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg2);
+  color:var(--ink);font-family:Poppins;font-size:12px;font-weight:600;cursor:pointer;display:grid;place-items:center}
+.langwrap{position:relative}
+.langmenu{position:absolute;right:0;top:44px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);padding:6px;display:none;min-width:112px;z-index:45}
+.langmenu.open{display:block}
+.langmenu button{display:block;width:100%;text-align:left;padding:9px 12px;border:0;background:none;
+  color:var(--ink);font-size:15px;border-radius:9px;cursor:pointer;font-family:Lato}
+
+.hero{position:relative;overflow:hidden;padding:40px 20px 34px;
+  background:radial-gradient(120% 130% at 80% 5%, #1d3a63 0%, #12203a 48%, #0a1120 100%);
+  border-bottom:1px solid var(--line)}
+.hero .glow{position:absolute;width:320px;height:320px;right:-90px;top:-110px;
+  background:radial-gradient(circle,rgba(224,71,155,.28) 0%,rgba(224,71,155,0) 70%);pointer-events:none}
+.hero .in{position:relative;max-width:620px;margin:0 auto}
+.kicker{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(240,180,41,.5);
+  border-radius:999px;padding:5px 13px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:#f6c96a;background:rgba(10,17,32,.5);margin-bottom:16px;font-family:Poppins;font-weight:600}
+.hero h1{font-size:clamp(29px,8vw,42px);line-height:1.04;margin:0 0 12px;color:#fff}
+.hero h1 span{display:block;background:linear-gradient(90deg,#f0b429,#e0479b);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0 0 20px;font-size:16.5px;color:#c3d2e6;max-width:26em}
+.herocta{display:flex;gap:10px;flex-wrap:wrap}
+
+/* счётчик-одометр — вау */
+.meter{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:17px;margin:-26px auto 26px;max-width:580px;position:relative;z-index:5;box-shadow:var(--shadow)}
+.meter .mt{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-family:Poppins;text-align:center}
+.mval{font-family:Poppins;font-weight:700;font-size:clamp(32px,10vw,46px);text-align:center;margin:6px 0 2px;
+  background:linear-gradient(90deg,#f0b429,#e0479b);-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-variant-numeric:tabular-nums}
+.msub{font-size:12.5px;color:var(--muted);text-align:center}
+.mrow{display:flex;gap:9px;margin-top:14px}
+.mcell{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:9px 10px;text-align:center}
+.mcell .v{font-family:Poppins;font-weight:700;font-size:16px}
+.mcell .k{font-size:10.5px;color:var(--muted);margin-top:1px}
+
+section{margin-bottom:30px}
+h2.sec{font-size:21px;margin:0 0 6px}
+p.lead{color:var(--muted);font-size:14.5px;margin:0 0 15px}
+
+.grid2{display:grid;gap:11px}
+.blk{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:15px 16px}
+.blk h3{margin:0 0 5px;font-size:16px;display:flex;align-items:center;gap:8px}
+.blk h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:0 0 8px}
+.blk p{margin:0;font-size:14px;color:var(--muted)}
+.blk.mag h3 .dot{background:var(--mag)}
+.blk.cy h3 .dot{background:var(--cyan)}
+.blk.ok h3 .dot{background:var(--ok)}
+
+.roles3{display:grid;gap:10px}
+.rc{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:15px 16px;display:flex;gap:13px}
+.rc .ic{flex:0 0 38px;height:38px;border-radius:11px;background:var(--bg3);display:grid;place-items:center;color:var(--accent)}
+.rc .tx{flex:1}
+.rc .tx b{font-family:Poppins;font-size:15.5px;display:block;margin-bottom:3px}
+.rc .tx span{font-size:13.5px;color:var(--muted)}
+
+/* допуслуги */
+.ups{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.up{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px 13px;
+  display:flex;align-items:center;gap:10px}
+.up .i{flex:0 0 30px;height:30px;border-radius:9px;background:var(--bg3);display:grid;place-items:center;color:var(--mag)}
+.up .t{font-size:13px;line-height:1.3}
+.up .t b{font-family:Poppins;font-size:13.5px;display:block}
+.up .t span{color:var(--muted);font-size:11.5px}
+
+/* лестница */
+.ladder{display:grid;gap:9px}
+.step{display:flex;gap:12px;background:var(--bg2);border:1px solid var(--line);border-radius:15px;padding:13px 14px}
+.step .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-family:Poppins;font-weight:700;font-size:12.5px}
+.step .tx{flex:1;font-size:14px;line-height:1.45}
+.step .tx b{font-family:Poppins;display:block;margin-bottom:2px;font-size:15px}
+.step .tx span{color:var(--muted)}
+
+/* субсидии */
+.subs{display:grid;gap:9px}
+.sub{display:flex;align-items:flex-start;gap:11px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:13px 14px}
+.sub .i{flex:0 0 30px;height:30px;border-radius:9px;background:color-mix(in srgb,var(--ok) 16%,transparent);
+  display:grid;place-items:center;color:var(--ok)}
+.sub .t{flex:1;font-size:13.5px;line-height:1.45}
+.sub .t b{font-family:Poppins;font-size:14.5px;display:block;margin-bottom:1px}
+.sub .t span{color:var(--muted)}
+
+.price{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 14%,var(--bg2)),var(--bg2));
+  border:1px solid color-mix(in srgb,var(--accent) 38%,var(--line));border-radius:var(--radius);padding:20px;text-align:center}
+.price .big{font-family:Poppins;font-weight:700;font-size:42px;line-height:1;
+  background:linear-gradient(90deg,#f0b429,#e0479b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.price .per{font-size:14px;color:var(--muted);margin-top:4px}
+.price ul{list-style:none;padding:0;margin:15px 0 0;text-align:left;display:grid;gap:7px}
+.price li{font-size:13.5px;display:flex;gap:9px;align-items:flex-start}
+.price li svg{flex:0 0 15px;margin-top:3px;color:var(--ok)}
+.badge10{display:inline-block;background:var(--mag);color:#fff;border-radius:999px;padding:4px 12px;
+  font-family:Poppins;font-weight:700;font-size:11.5px;margin-bottom:11px;letter-spacing:.03em}
+
+.cta{border:0;border-radius:14px;padding:14px 22px;background:linear-gradient(90deg,#f0b429,#e6a01a);
+  color:var(--accent-ink);font-family:Poppins;font-weight:700;font-size:15px;cursor:pointer;
+  text-decoration:none;display:inline-block;text-align:center}
+.cta.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+.cta.wide{display:block;width:100%}
+.cta.dark{color:var(--ink);border-color:var(--line)}
+
+.note{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13.5px;line-height:1.55;color:var(--muted)}
+.note b{font-family:Poppins;color:var(--ink)}
+
+footer{padding:32px 20px 60px;text-align:center;font-size:15px;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--accent);
+  text-underline-offset:4px;display:inline-block;padding:8px 4px}
+@media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+
+<div class="top">
+  <div class="top-in">
+    <div class="mark">
+      <svg width="26" height="26" viewBox="0 0 100 100" fill="none" stroke="url(#gg)" stroke-width="7" stroke-linecap="round">
+        <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f0b429"/><stop offset="100%" stop-color="#e0479b"/></linearGradient></defs>
+        <path d="M22 62 L42 18 L62 62"/><path d="M31 47 H53"/>
+        <path d="M14 82 Q29 74 44 82 Q59 90 74 82 Q81 78 88 80"/>
+        <path d="M74 20 v34" stroke-width="6"/>
+      </svg>
+      <span>nLm</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="langwrap">
+      <button class="rbtn" id="langBtn">PT</button>
+      <div class="langmenu" id="langMenu">
+        <button data-l="pt">Português</button><button data-l="en">English</button>
+        <button data-l="ru">Русский</button><button data-l="es">Español</button><button data-l="de">Deutsch</button>
+      </div>
+    </div>
+    <button class="rbtn" id="themeBtn">☀</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="glow"></div>
+  <div class="in">
+    <span class="kicker" data-i="kick">Nova Lavagem da Madeira</span>
+    <h1><span data-i="h1a" style="background:none;color:#fff">Encha a agenda.</span><span data-i="h1b">Depois cresça.</span></h1>
+    <p data-i="sub">Marcação online, lista de espera no WhatsApp e extras vendidos enquanto o carro já está consigo. Para lavagens que hoje trabalham ao telefone.</p>
+    <div class="herocta">
+      <a class="cta" id="demoBtn" href="https://asm1.seedwave.pt/" target="_blank" rel="noopener" data-i="ctaDemo">Ver demonstração</a>
+      <a class="cta ghost" href="mailto:i.kartuzov@gmail.com?subject=nLm" data-i="ctaTalk">Falar connosco</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="meter">
+    <div class="mt" data-i="mTitle">O que uma agenda cheia vale por mês</div>
+    <div class="mval" id="mVal">—</div>
+    <div class="msub" data-i="mSub">estimativa a partir de 3 boxes, 8 horas úteis e ticket médio de 14 €</div>
+    <div class="mrow">
+      <div class="mcell"><div class="v" id="m1">—</div><div class="k" data-i="mK1">carros/dia</div></div>
+      <div class="mcell"><div class="v" id="m2">—</div><div class="k" data-i="mK2">extras vendidos</div></div>
+      <div class="mcell"><div class="v" id="m3">—</div><div class="k" data-i="mK3">horas mortas</div></div>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="sec" data-i="s1H">O problema não é o preço. É o telefone.</h2>
+    <p class="lead" data-i="s1P">Uma lavagem que trabalha bem perde clientes por três coisas — e nenhuma delas se resolve baixando o preço.</p>
+    <div class="grid2">
+      <div class="blk"><h3><span class="dot"></span><span data-i="p1t">Quem não consegue marcar, não espera</span></h3><p data-i="p1d">Liga, dá ocupado, lava noutro sítio. Ninguém volta a ligar duas vezes.</p></div>
+      <div class="blk mag"><h3><span class="dot"></span><span data-i="p2t">Faltas custam o box inteiro</span></h3><p data-i="p2d">Marcou por telefone, não apareceu, o box ficou parado. Sem sinal pago, não há custo para faltar.</p></div>
+      <div class="blk cy"><h3><span class="dot"></span><span data-i="p3t">As horas mortas ninguém vê</span></h3><p data-i="p3d">Sem dados, ninguém sabe que às 12h e às 14h o box está vazio todos os dias.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec" data-i="s2H">Três ecrãs, um sistema</h2>
+    <p class="lead" data-i="s2P">O mesmo mapa do dia, visto de três lados.</p>
+    <div class="roles3">
+      <div class="rc"><div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="2"/><path d="M5 20c1-4 4.5-5.5 7-5.5S18 16 19 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="tx"><b data-i="r1t">Cliente</b><span data-i="r1d">Vê os boxes livres por dia e hora, marca, paga (ou não), recebe um código. No fim: gorjeta à equipa e avaliação no Google.</span></div></div>
+      <div class="rc"><div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 18V9l8-5 8 5v9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 18h16M9 18v-5h6v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="tx"><b data-i="r2t">Balcão</b><span data-i="r2d">Quem atende o telefone marca por ele em dois toques, sem pagamento. WhatsApp de confirmação, ligar, repetir a última lavagem — tudo numa linha.</span></div></div>
+      <div class="rc"><div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 19V10M10 19V5M16 19v-7M22 19H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="tx"><b data-i="r3t">Dono</b><span data-i="r3d">Faturação do dia, ocupação hora a hora, todos os carros no mesmo sítio — telefone e online. Do telemóvel, onde estiver.</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec" data-i="s3H">O carro já está consigo. Aproveite.</h2>
+    <p class="lead" data-i="s3P">O cliente deixa a chave. Quem leva o carro ao box vê o que o dono não vê — e propõe na aplicação, com foto e preço. Um toque para aceitar.</p>
+    <div class="ups" id="ups"></div>
+    <p class="note" style="margin-top:12px" data-i="s3N"><b>Sem esforço de venda.</b> Ninguém tem de convencer ninguém ao balcão: a proposta chega ao telemóvel enquanto o carro é lavado. O ticket médio sobe sem entrar mais um carro.</p>
+  </section>
+
+  <section>
+    <h2 class="sec" data-i="s4H">Como cresce, mês a mês</h2>
+    <div class="ladder">
+      <div class="step"><span class="n">1</span><span class="tx"><b data-i="l1t">Mês 1 · marcação</b><span data-i="l1d">Online e telefone no mesmo mapa. Lista de espera avisa por WhatsApp quando alguém desmarca.</span></span></div>
+      <div class="step"><span class="n">2</span><span class="tx"><b data-i="l2t">Mês 2 · reputação e extras</b><span data-i="l2d">Avaliações no Google sobem com um toque depois da lavagem. Os extras aparecem em cada carro.</span></span></div>
+      <div class="step"><span class="n">3</span><span class="tx"><b data-i="l3t">Mês 3 · horas mortas</b><span data-i="l3d">Avenças mensais e frotas (rent-a-car, táxis) enchem o que estava vazio ao meio-dia.</span></span></div>
+      <div class="step"><span class="n">4</span><span class="tx"><b data-i="l4t">Mês 6 · procura provada</b><span data-i="l4d">Agenda cheia e um registo de quantos clientes ficaram de fora. É a prova que falta a qualquer candidatura.</span></span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec" data-i="s5H">E aqui entra o Estado</h2>
+    <p class="lead" data-i="s5P">Ampliar uma lavagem é exatamente o tipo de projeto que os apoios públicos financiam — água, energia e equipamento ao mesmo tempo.</p>
+    <div class="subs" id="subs"></div>
+    <p class="note" style="margin-top:12px" data-i="s5N"><b>A aplicação é a peça que falta.</b> As candidaturas não caem por falta de vontade: caem por falta de números. Seis meses de ocupação, recusas e ticket médio valem mais do que qualquer plano de negócios escrito à pressa.</p>
+  </section>
+
+  <section>
+    <div class="price">
+      <span class="badge10" data-i="badge">Primeiras 5 lavagens</span>
+      <div class="big">50 €</div>
+      <div class="per" data-i="per">por mês · preço fixo para sempre</div>
+      <ul id="incl"></ul>
+      <a class="cta wide" style="margin-top:17px" href="mailto:i.kartuzov@gmail.com?subject=nLm%20-%20quero%20experimentar" data-i="ctaTry">Quero experimentar</a>
+      <p class="msub" style="margin-top:10px" data-i="priceN">Sem instalação, sem contrato longo. Os pagamentos dos clientes entram diretamente na conta da lavagem.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="note" data-i="who"><b>Quem faz.</b> Igor Kartuzov, SeedWave — Madeira. Construo ferramentas que enchem agendas e, quando os números aparecem, ajudo a transformá-los numa candidatura a apoios públicos.</div>
+  </section>
+
+</div>
+
+<footer>© <span id="yr"></span> <a href="https://seedwave.pt" target="_blank" rel="noopener">SeedWave</a> ·
+  <a href="https://www.linkedin.com/in/igorkartuzov/" target="_blank" rel="noopener">Igor Kartuzov</a></footer>
+
+<script>
+const T={
+ pt:{kick:"Nova Lavagem da Madeira",h1a:"Encha a agenda.",h1b:"Depois cresça.",
+  sub:"Marcação online, lista de espera no WhatsApp e extras vendidos enquanto o carro já está consigo. Para lavagens que hoje trabalham ao telefone.",
+  ctaDemo:"Ver demonstração",ctaTalk:"Falar connosco",
+  mTitle:"O que uma agenda cheia vale por mês",mSub:"estimativa a partir de 3 boxes, 8 horas úteis e ticket médio de 14 €",
+  mK1:"carros/dia",mK2:"extras vendidos",mK3:"horas mortas",
+  s1H:"O problema não é o preço. É o telefone.",
+  s1P:"Uma lavagem que trabalha bem perde clientes por três coisas — e nenhuma delas se resolve baixando o preço.",
+  p1t:"Quem não consegue marcar, não espera",p1d:"Liga, dá ocupado, lava noutro sítio. Ninguém volta a ligar duas vezes.",
+  p2t:"Faltas custam o box inteiro",p2d:"Marcou por telefone, não apareceu, o box ficou parado. Sem sinal pago, não há custo para faltar.",
+  p3t:"As horas mortas ninguém vê",p3d:"Sem dados, ninguém sabe que às 12h e às 14h o box está vazio todos os dias.",
+  s2H:"Três ecrãs, um sistema",s2P:"O mesmo mapa do dia, visto de três lados.",
+  r1t:"Cliente",r1d:"Vê os boxes livres por dia e hora, marca, paga (ou não), recebe um código. No fim: gorjeta à equipa e avaliação no Google.",
+  r2t:"Balcão",r2d:"Quem atende o telefone marca por ele em dois toques, sem pagamento. WhatsApp de confirmação, ligar, repetir a última lavagem — tudo numa linha.",
+  r3t:"Dono",r3d:"Faturação do dia, ocupação hora a hora, todos os carros no mesmo sítio — telefone e online. Do telemóvel, onde estiver.",
+  s3H:"O carro já está consigo. Aproveite.",
+  s3P:"O cliente deixa a chave. Quem leva o carro ao box vê o que o dono não vê — e propõe na aplicação, com foto e preço. Um toque para aceitar.",
+  s3N:"<b>Sem esforço de venda.</b> Ninguém tem de convencer ninguém ao balcão: a proposta chega ao telemóvel enquanto o carro é lavado. O ticket médio sobe sem entrar mais um carro.",
+  u1:"Óleo e níveis",u1d:"atesta na hora",u2:"Escovas",u2d:"borrachas gastas",u3:"Lâmpadas",u3d:"queimadas",
+  u4:"Pressão dos pneus",u4d:"verificar e calibrar",u5:"Tapetes novos",u5d:"quando não têm salvação",u6:"Carregar o elétrico",u6d:"enquanto lava",
+  s4H:"Como cresce, mês a mês",
+  l1t:"Mês 1 · marcação",l1d:"Online e telefone no mesmo mapa. Lista de espera avisa por WhatsApp quando alguém desmarca.",
+  l2t:"Mês 2 · reputação e extras",l2d:"Avaliações no Google sobem com um toque depois da lavagem. Os extras aparecem em cada carro.",
+  l3t:"Mês 3 · horas mortas",l3d:"Avenças mensais e frotas (rent-a-car, táxis) enchem o que estava vazio ao meio-dia.",
+  l4t:"Mês 6 · procura provada",l4d:"Agenda cheia e um registo de quantos clientes ficaram de fora. É a prova que falta a qualquer candidatura.",
+  s5H:"E aqui entra o Estado",
+  s5P:"Ampliar uma lavagem é exatamente o tipo de projeto que os apoios públicos financiam — água, energia e equipamento ao mesmo tempo.",
+  b1t:"Microempresas RAM",b1d:"investimento de 25 000 a 300 000 € · até 50% a fundo perdido",
+  b2t:"Eficiência 2030",b2d:"recuperação e tratamento de água, descarbonização, equipamento eficiente",
+  b3t:"+ENERGIA Madeira",b3d:"painéis solares e baterias para o próprio consumo",
+  b4t:"Carregadores elétricos",b4d:"Fundo Ambiental: 80% do posto e da instalação",
+  b5t:"Contratação (IEM)",b5d:"apoio a novos postos de trabalho quando o segundo espaço abrir",
+  s5N:"<b>A aplicação é a peça que falta.</b> As candidaturas não caem por falta de vontade: caem por falta de números. Seis meses de ocupação, recusas e ticket médio valem mais do que qualquer plano de negócios escrito à pressa.",
+  badge:"Primeiras 5 lavagens",per:"por mês · preço fixo para sempre",
+  i1:"Página de marcação com os seus serviços e horários",i2:"Mapa do dia e ecrã de balcão para quem atende",
+  i3:"Lista de espera com aviso automático por WhatsApp",i4:"Gorjetas para a equipa e avaliações no Google",
+  i5:"Extras propostos ao cliente durante a lavagem",i6:"Relatório do dia e dados para candidaturas",i7:"Avisos por WhatsApp, Telegram, SMS ou chamada — como o cliente preferir",
+  ctaTry:"Quero experimentar",
+  priceN:"Sem instalação, sem contrato longo. Os pagamentos dos clientes entram diretamente na conta da lavagem.",
+  who:"<b>Quem faz.</b> Igor Kartuzov, SeedWave — Madeira. Construo ferramentas que enchem agendas e, quando os números aparecem, ajudo a transformá-los numa candidatura a apoios públicos."},
+
+ en:{kick:"Nova Lavagem da Madeira",h1a:"Fill the agenda.",h1b:"Then grow.",
+  sub:"Online booking, a WhatsApp waiting list and extras sold while the car is already with you. For car washes still running on the phone.",
+  ctaDemo:"See the demo",ctaTalk:"Talk to us",
+  mTitle:"What a full agenda is worth per month",mSub:"estimate based on 3 bays, 8 working hours and a €14 average ticket",
+  mK1:"cars/day",mK2:"extras sold",mK3:"dead hours",
+  s1H:"The problem isn't the price. It's the phone.",
+  s1P:"A wash that does good work still loses clients to three things — and none is fixed by cutting prices.",
+  p1t:"Who can't book, doesn't wait",p1d:"Calls, gets a busy tone, washes elsewhere. Nobody calls twice.",
+  p2t:"No-shows cost a whole bay",p2d:"Booked by phone, never showed, bay idle. With no deposit, missing costs nothing.",
+  p3t:"Nobody sees the dead hours",p3d:"Without data, nobody knows the bay is empty at noon every single day.",
+  s2H:"Three screens, one system",s2P:"The same day map, seen from three sides.",
+  r1t:"Customer",r1d:"Sees free bays by day and hour, books, pays (or not), gets a code. At the end: a tip for the team and a Google review.",
+  r2t:"Front desk",r2d:"Whoever answers the phone books for the caller in two taps, no payment needed. WhatsApp confirmation, call, repeat last wash — all in one line.",
+  r3t:"Owner",r3d:"Daily revenue, occupancy hour by hour, every car in one place — phone and online. From the phone, anywhere.",
+  s3H:"The car is already with you. Use it.",
+  s3P:"The customer leaves the key. Whoever moves the car to the bay sees what the owner doesn't — and offers it in the app, with a photo and a price. One tap to accept.",
+  s3N:"<b>No selling effort.</b> Nobody has to convince anyone at the counter: the offer arrives on the phone while the car is being washed. The average ticket rises without one extra car.",
+  u1:"Oil and fluids",u1d:"topped up on the spot",u2:"Wiper blades",u2d:"worn rubber",u3:"Bulbs",u3d:"burnt out",
+  u4:"Tyre pressure",u4d:"check and inflate",u5:"New mats",u5d:"when they're beyond saving",u6:"Charge the EV",u6d:"while it's washed",
+  s4H:"How it grows, month by month",
+  l1t:"Month 1 · booking",l1d:"Online and phone on the same map. The waiting list pings WhatsApp when someone cancels.",
+  l2t:"Month 2 · reputation and extras",l2d:"Google reviews climb with one tap after the wash. Extras appear on every car.",
+  l3t:"Month 3 · dead hours",l3d:"Monthly plans and fleets (rent-a-car, taxis) fill what was empty at midday.",
+  l4t:"Month 6 · proven demand",l4d:"A full agenda and a record of how many clients were turned away. That's the proof every application lacks.",
+  s5H:"And here the State steps in",
+  s5P:"Expanding a car wash is exactly the kind of project public funding covers — water, energy and equipment at once.",
+  b1t:"RAM microenterprises",b1d:"investment €25,000–300,000 · up to 50% non-repayable",
+  b2t:"Eficiência 2030",b2d:"water recovery and treatment, decarbonisation, efficient equipment",
+  b3t:"+ENERGIA Madeira",b3d:"solar panels and batteries for self-consumption",
+  b4t:"EV chargers",b4d:"Fundo Ambiental: 80% of the charger and the installation",
+  b5t:"Hiring (IEM)",b5d:"support for new jobs when the second site opens",
+  s5N:"<b>The app is the missing piece.</b> Applications don't fail for lack of will — they fail for lack of numbers. Six months of occupancy, refusals and average ticket beat any business plan written in a hurry.",
+  badge:"First 5 washes",per:"per month · fixed forever",
+  i1:"Booking page with your services and hours",i2:"Day map and front-desk screen for whoever answers",
+  i3:"Waiting list with automatic WhatsApp alerts",i4:"Tips for the team and Google reviews",
+  i5:"Extras offered to the client during the wash",i6:"Daily report and data for funding applications",i7:"Alerts by WhatsApp, Telegram, SMS or a call — whichever the client prefers",
+  ctaTry:"I want to try it",
+  priceN:"No installation, no long contract. Customer payments go straight to the wash's own account.",
+  who:"<b>Who builds it.</b> Igor Kartuzov, SeedWave — Madeira. I build tools that fill agendas and, once the numbers exist, I help turn them into a public funding application."},
+
+ ru:{kick:"Nova Lavagem da Madeira",h1a:"Заполните расписание.",h1b:"Потом растите.",
+  sub:"Онлайн-запись, лист ожидания в WhatsApp и допуслуги, которые продаются, пока машина уже у вас. Для моек, которые до сих пор работают по телефону.",
+  ctaDemo:"Посмотреть демо",ctaTalk:"Связаться",
+  mTitle:"Сколько стоит полное расписание в месяц",mSub:"расчёт для 3 боксов, 8 рабочих часов и среднего чека 14 €",
+  mK1:"машин/день",mK2:"допуслуг продано",mK3:"мёртвых часов",
+  s1H:"Проблема не в цене. Проблема в телефоне.",
+  s1P:"Мойка, которая моет хорошо, теряет клиентов на трёх вещах — и ни одна не лечится снижением цены.",
+  p1t:"Кто не смог записаться — не ждёт",p1d:"Позвонил, занято, помыл в другом месте. Второй раз не звонит никто.",
+  p2t:"Неявка стоит целого бокса",p2d:"Записался по телефону, не приехал, бокс простоял. Без предоплаты не приехать ничего не стоит.",
+  p3t:"Мёртвых часов никто не видит",p3d:"Без данных никто не знает, что в 12 и в 14 бокс пуст каждый день.",
+  s2H:"Три экрана, одна система",s2P:"Одна и та же карта дня — с трёх сторон.",
+  r1t:"Клиент",r1d:"Видит свободные боксы по дням и часам, записывается, платит (или нет), получает код. В конце — чаевые команде и отзыв в Google.",
+  r2t:"Стойка",r2d:"Тот, кто отвечает на звонки, записывает клиента в два касания, без оплаты. WhatsApp-подтверждение, звонок, «как в прошлый раз» — всё в одной строке.",
+  r3t:"Собственник",r3d:"Выручка дня, загрузка по часам, все машины в одном месте — телефон и онлайн. С телефона, откуда угодно.",
+  s3H:"Машина уже у вас. Используйте это.",
+  s3P:"Клиент оставил ключ. Тот, кто перегоняет машину в бокс, видит то, чего не видит владелец — и предлагает прямо в приложении, с фото и ценой. Одно касание, чтобы согласиться.",
+  s3N:"<b>Без продавливания.</b> Никого не нужно уговаривать у стойки: предложение приходит на телефон, пока машину моют. Средний чек растёт без единой лишней машины.",
+  u1:"Масло и жидкости",u1d:"долить на месте",u2:"Щётки",u2d:"изношенные резинки",u3:"Лампочки",u3d:"перегоревшие",
+  u4:"Давление в шинах",u4d:"проверить и подкачать",u5:"Новые коврики",u5d:"когда старые не спасти",u6:"Зарядить электромобиль",u6d:"пока моют",
+  s4H:"Как это растёт, месяц за месяцем",
+  l1t:"Месяц 1 · запись",l1d:"Онлайн и телефон на одной карте. Лист ожидания пишет в WhatsApp, когда кто-то отменяет.",
+  l2t:"Месяц 2 · репутация и допуслуги",l2d:"Отзывы в Google растут одним касанием после мойки. Допуслуги появляются на каждой машине.",
+  l3t:"Месяц 3 · мёртвые часы",l3d:"Абонементы и автопарки (прокат, такси) заполняют то, что пустовало в полдень.",
+  l4t:"Месяц 6 · доказанный спрос",l4d:"Полное расписание и запись о том, скольким отказали. Это то доказательство, которого не хватает любой заявке.",
+  s5H:"И здесь подключается государство",
+  s5P:"Расширение мойки — ровно тот тип проекта, который финансирует господдержка: вода, энергия и оборудование сразу.",
+  b1t:"Микропредприятия РАМ",b1d:"инвестиции 25 000–300 000 € · до 50% безвозвратно",
+  b2t:"Eficiência 2030",b2d:"рекуперация и очистка воды, декарбонизация, энергоэффективное оборудование",
+  b3t:"+ENERGIA Madeira",b3d:"солнечные панели и аккумуляторы для собственного потребления",
+  b4t:"Зарядки для электромобилей",b4d:"Fundo Ambiental: 80% станции и монтажа",
+  b5t:"Найм (IEM)",b5d:"поддержка новых рабочих мест, когда откроется вторая точка",
+  s5N:"<b>Приложение — недостающая деталь.</b> Заявки проваливаются не от нехватки желания, а от нехватки цифр. Шесть месяцев загрузки, отказов и среднего чека весят больше любого бизнес-плана, написанного наспех.",
+  badge:"Первым 5 мойкам",per:"в месяц · цена закрепляется навсегда",
+  i1:"Страница записи с вашими услугами и часами",i2:"Карта дня и экран стойки для того, кто принимает звонки",
+  i3:"Лист ожидания с автоматическим оповещением в WhatsApp",i4:"Чаевые команде и отзывы в Google",
+  i5:"Допуслуги, предложенные клиенту во время мойки",i6:"Отчёт дня и данные для заявок на субсидии",i7:"Уведомления в WhatsApp, Telegram, SMS или звонком — как удобно клиенту",
+  ctaTry:"Хочу попробовать",
+  priceN:"Без установки и долгого договора. Платежи клиентов идут напрямую на счёт мойки.",
+  who:"<b>Кто делает.</b> Игорь Картузов, SeedWave — Мадейра. Собираю инструменты, которые заполняют расписание, а когда появляются цифры — помогаю превратить их в заявку на господдержку."},
+
+ es:{kick:"Nova Lavagem da Madeira",h1a:"Llene la agenda.",h1b:"Después crezca.",
+  sub:"Reserva online, lista de espera por WhatsApp y extras vendidos mientras el coche ya está con usted.",
+  ctaDemo:"Ver demo",ctaTalk:"Hablar con nosotros",
+  mTitle:"Lo que vale una agenda llena al mes",mSub:"estimación para 3 boxes, 8 horas y ticket medio de 14 €",
+  mK1:"coches/día",mK2:"extras vendidos",mK3:"horas muertas",
+  s1H:"El problema no es el precio. Es el teléfono.",
+  s1P:"Un lavado que trabaja bien pierde clientes por tres cosas — y ninguna se arregla bajando el precio.",
+  p1t:"Quien no puede reservar, no espera",p1d:"Llama, comunica, lava en otro sitio. Nadie llama dos veces.",
+  p2t:"Las ausencias cuestan un box entero",p2d:"Reservó por teléfono, no vino, el box quedó parado.",
+  p3t:"Las horas muertas no se ven",p3d:"Sin datos, nadie sabe que a las 12 y a las 14 el box está vacío cada día.",
+  s2H:"Tres pantallas, un sistema",s2P:"El mismo mapa del día, visto desde tres lados.",
+  r1t:"Cliente",r1d:"Ve los boxes libres por día y hora, reserva, paga (o no), recibe un código. Al final: propina al equipo y reseña en Google.",
+  r2t:"Mostrador",r2d:"Quien atiende el teléfono reserva por él en dos toques, sin pago. WhatsApp de confirmación, llamar, repetir el último lavado.",
+  r3t:"Dueño",r3d:"Facturación del día, ocupación hora a hora, todos los coches en el mismo sitio. Desde el móvil.",
+  s3H:"El coche ya está con usted. Aprovéchelo.",
+  s3P:"El cliente deja la llave. Quien lleva el coche al box ve lo que el dueño no ve — y lo propone en la app, con foto y precio.",
+  s3N:"<b>Sin esfuerzo de venta.</b> La propuesta llega al móvil mientras lavan el coche. El ticket medio sube sin un coche más.",
+  u1:"Aceite y niveles",u1d:"rellenar al momento",u2:"Escobillas",u2d:"gomas gastadas",u3:"Bombillas",u3d:"fundidas",
+  u4:"Presión de neumáticos",u4d:"revisar e inflar",u5:"Alfombrillas nuevas",u5d:"cuando no tienen salvación",u6:"Cargar el eléctrico",u6d:"mientras lavan",
+  s4H:"Cómo crece, mes a mes",
+  l1t:"Mes 1 · reservas",l1d:"Online y teléfono en el mismo mapa. La lista de espera avisa por WhatsApp.",
+  l2t:"Mes 2 · reputación y extras",l2d:"Las reseñas suben con un toque tras el lavado.",
+  l3t:"Mes 3 · horas muertas",l3d:"Abonos y flotas llenan lo que estaba vacío al mediodía.",
+  l4t:"Mes 6 · demanda probada",l4d:"Agenda llena y registro de cuántos se quedaron fuera. Es la prueba que falta a cualquier candidatura.",
+  s5H:"Y aquí entra el Estado",
+  s5P:"Ampliar un lavado es justo el tipo de proyecto que financian las ayudas: agua, energía y equipamiento a la vez.",
+  b1t:"Microempresas RAM",b1d:"inversión 25 000–300 000 € · hasta 50% a fondo perdido",
+  b2t:"Eficiência 2030",b2d:"recuperación y tratamiento de agua, descarbonización, equipamiento eficiente",
+  b3t:"+ENERGIA Madeira",b3d:"paneles solares y baterías para autoconsumo",
+  b4t:"Cargadores eléctricos",b4d:"Fundo Ambiental: 80% del poste y la instalación",
+  b5t:"Contratación (IEM)",b5d:"apoyo a nuevos empleos cuando abra el segundo local",
+  s5N:"<b>La app es la pieza que falta.</b> Las candidaturas no caen por falta de ganas: caen por falta de números.",
+  badge:"Primeros 5 lavados",per:"al mes · precio fijo para siempre",
+  i1:"Página de reservas con sus servicios y horarios",i2:"Mapa del día y pantalla de mostrador",
+  i3:"Lista de espera con aviso automático por WhatsApp",i4:"Propinas para el equipo y reseñas en Google",
+  i5:"Extras propuestos al cliente durante el lavado",i6:"Informe del día y datos para candidaturas",i7:"Avisos por WhatsApp, Telegram, SMS o llamada — como prefiera el cliente",
+  ctaTry:"Quiero probarlo",
+  priceN:"Sin instalación, sin contrato largo. Los pagos entran directamente en la cuenta del lavado.",
+  who:"<b>Quién lo hace.</b> Igor Kartuzov, SeedWave — Madeira. Construyo herramientas que llenan agendas y, cuando aparecen los números, ayudo a convertirlos en una candidatura a ayudas públicas."},
+
+ de:{kick:"Nova Lavagem da Madeira",h1a:"Füllen Sie den Kalender.",h1b:"Dann wachsen Sie.",
+  sub:"Onlinebuchung, WhatsApp-Warteliste und Zusatzleistungen, die verkauft werden, während das Auto schon bei Ihnen steht.",
+  ctaDemo:"Demo ansehen",ctaTalk:"Kontakt",
+  mTitle:"Was ein voller Kalender im Monat wert ist",mSub:"Schätzung für 3 Boxen, 8 Stunden und 14 € Durchschnittsbon",
+  mK1:"Autos/Tag",mK2:"Extras verkauft",mK3:"tote Stunden",
+  s1H:"Das Problem ist nicht der Preis. Es ist das Telefon.",
+  s1P:"Eine Waschanlage, die gut arbeitet, verliert Kunden an drei Dinge — und keines davon löst ein niedrigerer Preis.",
+  p1t:"Wer nicht buchen kann, wartet nicht",p1d:"Ruft an, besetzt, wäscht woanders. Niemand ruft zweimal an.",
+  p2t:"No-Shows kosten die ganze Box",p2d:"Telefonisch gebucht, nicht erschienen, Box stand still.",
+  p3t:"Tote Stunden sieht niemand",p3d:"Ohne Daten weiß niemand, dass die Box mittags jeden Tag leer steht.",
+  s2H:"Drei Bildschirme, ein System",s2P:"Dieselbe Tageskarte, aus drei Perspektiven.",
+  r1t:"Kunde",r1d:"Sieht freie Boxen nach Tag und Stunde, bucht, zahlt (oder nicht), bekommt einen Code. Am Ende: Trinkgeld und Google-Bewertung.",
+  r2t:"Theke",r2d:"Wer ans Telefon geht, bucht in zwei Tipps — ohne Zahlung. WhatsApp-Bestätigung, Anruf, letzte Wäsche wiederholen.",
+  r3t:"Inhaber",r3d:"Tagesumsatz, Auslastung Stunde für Stunde, alle Autos an einem Ort. Vom Handy, überall.",
+  s3H:"Das Auto ist schon bei Ihnen. Nutzen Sie das.",
+  s3P:"Der Kunde lässt den Schlüssel da. Wer das Auto zur Box fährt, sieht, was der Besitzer nicht sieht — und bietet es in der App an, mit Foto und Preis.",
+  s3N:"<b>Ohne Verkaufsdruck.</b> Das Angebot kommt aufs Handy, während gewaschen wird. Der Durchschnittsbon steigt ohne ein einziges zusätzliches Auto.",
+  u1:"Öl und Flüssigkeiten",u1d:"sofort auffüllen",u2:"Wischerblätter",u2d:"verschlissene Gummis",u3:"Lampen",u3d:"durchgebrannt",
+  u4:"Reifendruck",u4d:"prüfen und füllen",u5:"Neue Matten",u5d:"wenn nichts mehr hilft",u6:"E-Auto laden",u6d:"während der Wäsche",
+  s4H:"Wie es Monat für Monat wächst",
+  l1t:"Monat 1 · Buchung",l1d:"Online und Telefon auf einer Karte. Die Warteliste meldet sich per WhatsApp.",
+  l2t:"Monat 2 · Ruf und Extras",l2d:"Google-Bewertungen steigen mit einem Tipp nach der Wäsche.",
+  l3t:"Monat 3 · tote Stunden",l3d:"Abos und Flotten füllen, was mittags leer war.",
+  l4t:"Monat 6 · belegte Nachfrage",l4d:"Voller Kalender und ein Nachweis, wie viele abgewiesen wurden.",
+  s5H:"Und hier kommt der Staat",
+  s5P:"Eine Waschanlage zu erweitern ist genau die Art Projekt, die öffentlich gefördert wird — Wasser, Energie und Ausrüstung zugleich.",
+  b1t:"RAM-Kleinstunternehmen",b1d:"Investition 25 000–300 000 € · bis 50% nicht rückzahlbar",
+  b2t:"Eficiência 2030",b2d:"Wasseraufbereitung, Dekarbonisierung, effiziente Ausrüstung",
+  b3t:"+ENERGIA Madeira",b3d:"Solarpaneele und Batterien für den Eigenverbrauch",
+  b4t:"E-Ladesäulen",b4d:"Fundo Ambiental: 80% der Säule und der Installation",
+  b5t:"Einstellung (IEM)",b5d:"Förderung neuer Stellen, wenn der zweite Standort öffnet",
+  s5N:"<b>Die App ist das fehlende Stück.</b> Anträge scheitern nicht am Willen, sondern an Zahlen.",
+  badge:"Erste 5 Waschanlagen",per:"pro Monat · Preis bleibt für immer",
+  i1:"Buchungsseite mit Ihren Leistungen und Zeiten",i2:"Tageskarte und Thekenbildschirm",
+  i3:"Warteliste mit automatischer WhatsApp-Meldung",i4:"Trinkgeld fürs Team und Google-Bewertungen",
+  i5:"Extras, die dem Kunden während der Wäsche angeboten werden",i6:"Tagesbericht und Daten für Förderanträge",i7:"Hinweise per WhatsApp, Telegram, SMS oder Anruf — wie der Kunde will",
+  ctaTry:"Ich will es testen",
+  priceN:"Keine Installation, kein langer Vertrag. Kundenzahlungen gehen direkt auf das Konto der Waschanlage.",
+  who:"<b>Wer es baut.</b> Igor Kartuzov, SeedWave — Madeira. Ich baue Werkzeuge, die Kalender füllen — und wenn die Zahlen da sind, helfe ich, daraus einen Förderantrag zu machen."}
+};
+
+const UPS=[
+ {k:'u1',ic:'<path d="M7 20h10M9 20V9l3-5 3 5v11M8 12h8" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/>'},
+ {k:'u2',ic:'<path d="M4 18L16 6M14 4l4 4M6 20h6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>'},
+ {k:'u3',ic:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3 11v2h6v-2a6 6 0 0 0-3-11z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/>'},
+ {k:'u4',ic:'<circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7" fill="none"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>'},
+ {k:'u5',ic:'<rect x="4" y="5" width="16" height="14" rx="2.5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>'},
+ {k:'u6',ic:'<path d="M13 3l-6 9h5l-1 9 6-9h-5z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/>'}
+];
+const SUBS=['b1','b2','b3','b4','b5'];
+const INCL=['i1','i2','i3','i4','i7','i5','i6'];
+
+let L='pt';
+const $=s=>document.querySelector(s);
+const t=k=>T[L][k];
+
+function render(){
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const v=T[L][el.dataset.i]; if(v===undefined)return;
+    if(v.indexOf('<')>-1) el.innerHTML=v; else el.textContent=v;
+  });
+  $('#langBtn').textContent=L.toUpperCase();
+  document.documentElement.lang=L;
+  $('#ups').innerHTML=UPS.map(u=>`<div class="up">
+    <div class="i"><svg width="16" height="16" viewBox="0 0 24 24">${u.ic}</svg></div>
+    <div class="t"><b>${t(u.k)}</b><span>${t(u.k+'d')}</span></div></div>`).join('');
+  $('#subs').innerHTML=SUBS.map(s=>`<div class="sub">
+    <div class="i"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="t"><b>${t(s+'t')}</b><span>${t(s+'d')}</span></div></div>`).join('');
+  $('#incl').innerHTML=INCL.map(i=>`<li>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>${t(i)}</span></li>`).join('');
+}
+
+/* одометр */
+function animate(){
+  const target=8064, cars=24, extras=9, dead=3;
+  const dur=1400, t0=performance.now();
+  const fmt=n=>Math.round(n).toLocaleString('pt-PT').replace(/[,.]/g,' ')+' €';
+  function step(now){
+    const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+    $('#mVal').textContent=fmt(target*e);
+    $('#m1').textContent=Math.round(cars*e);
+    $('#m2').textContent=Math.round(extras*e);
+    $('#m3').textContent=Math.round(dead*(1-e))+0;
+    if(k<1)requestAnimationFrame(step);
+    else{$('#m3').textContent='0';}
+  }
+  requestAnimationFrame(step);
+}
+
+document.addEventListener('click',e=>{
+  const l=e.target.closest('[data-l]');
+  if(l){L=l.dataset.l;$('#langMenu').classList.remove('open');render();return;}
+  if(e.target.closest('#langBtn')){$('#langMenu').classList.toggle('open');return;}
+  $('#langMenu').classList.remove('open');
+});
+$('#themeBtn').onclick=()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next=cur==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',next);
+  $('#themeBtn').textContent=next==='light'?'☾':'☀';
+  try{localStorage.setItem('nlmtheme',next);}catch(e){}
+};
+try{const s=localStorage.getItem('nlmtheme');
+  if(s==='light'){document.documentElement.setAttribute('data-theme','light');$('#themeBtn').textContent='☾';}}catch(e){}
+$('#yr').textContent=new Date().getFullYear();
+const nav=(navigator.language||'pt').slice(0,2).toLowerCase();
+if(T[nav])L=nav;
+const q=new URLSearchParams(location.search).get('lang'); if(q&&T[q])L=q;
+render();
+let reduce=false;
+try{reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+if(reduce||typeof requestAnimationFrame==='undefined'){
+  $('#mVal').textContent='8 064 €';$('#m1').textContent='24';$('#m2').textContent='9';$('#m3').textContent='0';
+}else animate();
+</script>
+
+</body>
+</html>
