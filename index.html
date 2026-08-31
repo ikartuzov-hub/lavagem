@@ -169,12 +169,15 @@ footer a{color:var(--muted);text-decoration:underline;text-decoration-color:var(
 <div class="top">
   <div class="top-in">
     <div class="mark">
-      <svg width="26" height="26" viewBox="0 0 100 100" fill="none" stroke="url(#gg)" stroke-width="7" stroke-linecap="round">
+      <svg width="27" height="27" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="1" y="1" width="98" height="98" rx="24" fill="url(#gg)"/>
         <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#f0b429"/><stop offset="100%" stop-color="#e0479b"/></linearGradient></defs>
-        <path d="M22 62 L42 18 L62 62"/><path d="M31 47 H53"/>
-        <path d="M14 82 Q29 74 44 82 Q59 90 74 82 Q81 78 88 80"/>
-        <path d="M74 20 v34" stroke-width="6"/>
+          <stop offset="0%" stop-color="#f6c34a"/><stop offset="100%" stop-color="#e0479b"/></linearGradient></defs>
+        <g stroke="#17110a" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <path d="M24 64 L44 20 L64 64"/><path d="M33 49 H55"/><path d="M76 22 v42"/>
+        </g>
+        <path d="M16 82 Q30 75 44 82 Q58 89 72 82 Q79 79 86 81" stroke="#17110a" stroke-width="7"
+              stroke-linecap="round" fill="none" opacity=".9"/>
       </svg>
       <span>nLm</span>
     </div>
@@ -208,7 +211,7 @@ footer a{color:var(--muted);text-decoration:underline;text-decoration-color:var(
   <div class="meter">
     <div class="mt" data-i="mTitle">O que uma agenda cheia vale por mês</div>
     <div class="mval" id="mVal">—</div>
-    <div class="msub" data-i="mSub">estimativa a partir de 3 boxes, 8 horas úteis e ticket médio de 14 €</div>
+    <div class="msub" data-i="mSub">estimativa a partir de 3 boxes, 8 horas úteis e ticket médio de 24 €</div>
     <div class="mrow">
       <div class="mcell"><div class="v" id="m1">—</div><div class="k" data-i="mK1">carros/dia</div></div>
       <div class="mcell"><div class="v" id="m2">—</div><div class="k" data-i="mK2">extras vendidos</div></div>
@@ -267,10 +270,10 @@ footer a{color:var(--muted);text-decoration:underline;text-decoration-color:var(
     <div class="price">
       <span class="badge10" data-i="badge">Primeiras 5 lavagens</span>
       <div class="big">50 €</div>
-      <div class="per" data-i="per">por mês · preço fixo para sempre</div>
+      <div class="per" data-i="per">por mês — só a partir da 25.ª marcação online</div>
       <ul id="incl"></ul>
       <a class="cta wide" style="margin-top:17px" href="mailto:i.kartuzov@gmail.com?subject=nLm%20-%20quero%20experimentar" data-i="ctaTry">Quero experimentar</a>
-      <p class="msub" style="margin-top:10px" data-i="priceN">Sem instalação, sem contrato longo. Os pagamentos dos clientes entram diretamente na conta da lavagem.</p>
+      <p class="msub" style="margin-top:10px" data-i="priceN">Os 2 € de cada marcação são pagos pelo cliente — 25 marcações cobrem a assinatura. Menos de 25 num mês: não paga nada. Sem instalação, sem contrato longo. Os pagamentos entram diretamente na conta da lavagem.</p>
     </div>
   </section>
 
@@ -288,7 +291,7 @@ const T={
  pt:{kick:"Nova Lavagem da Madeira",h1a:"Encha a agenda.",h1b:"Depois cresça.",
   sub:"Marcação online, lista de espera no WhatsApp e extras vendidos enquanto o carro já está consigo. Para lavagens que hoje trabalham ao telefone.",
   ctaDemo:"Ver demonstração",ctaTalk:"Falar connosco",
-  mTitle:"O que uma agenda cheia vale por mês",mSub:"estimativa a partir de 3 boxes, 8 horas úteis e ticket médio de 14 €",
+  mTitle:"O que uma agenda cheia vale por mês",mSub:"estimativa a partir de 3 boxes, 8 horas úteis e ticket médio de 24 €",
   mK1:"carros/dia",mK2:"extras vendidos",mK3:"horas mortas",
   s1H:"O problema não é o preço. É o telefone.",
   s1P:"Uma lavagem que trabalha bem perde clientes por três coisas — e nenhuma delas se resolve baixando o preço.",
@@ -317,18 +320,18 @@ const T={
   b4t:"Carregadores elétricos",b4d:"Fundo Ambiental: 80% do posto e da instalação",
   b5t:"Contratação (IEM)",b5d:"apoio a novos postos de trabalho quando o segundo espaço abrir",
   s5N:"<b>A aplicação é a peça que falta.</b> As candidaturas não caem por falta de vontade: caem por falta de números. Seis meses de ocupação, recusas e ticket médio valem mais do que qualquer plano de negócios escrito à pressa.",
-  badge:"Primeiras 5 lavagens",per:"por mês · preço fixo para sempre",
+  badge:"Primeiras 5 lavagens",per:"por mês — só a partir da 25.ª marcação online",
   i1:"Página de marcação com os seus serviços e horários",i2:"Mapa do dia e ecrã de balcão para quem atende",
   i3:"Lista de espera com aviso automático por WhatsApp",i4:"Gorjetas para a equipa e avaliações no Google",
   i5:"Extras propostos ao cliente durante a lavagem",i6:"Relatório do dia e dados para candidaturas",i7:"Avisos por WhatsApp, Telegram, SMS ou chamada — como o cliente preferir",
   ctaTry:"Quero experimentar",
-  priceN:"Sem instalação, sem contrato longo. Os pagamentos dos clientes entram diretamente na conta da lavagem.",
+  priceN:"Os 2 € de cada marcação são pagos pelo cliente — 25 marcações cobrem a assinatura. Menos de 25 num mês: não paga nada. Sem instalação, sem contrato longo. Os pagamentos entram diretamente na conta da lavagem.",
   who:"<b>Quem faz.</b> Igor Kartuzov, SeedWave — Madeira. Construo ferramentas que enchem agendas e, quando os números aparecem, ajudo a transformá-los numa candidatura a apoios públicos."},
 
  en:{kick:"Nova Lavagem da Madeira",h1a:"Fill the agenda.",h1b:"Then grow.",
   sub:"Online booking, a WhatsApp waiting list and extras sold while the car is already with you. For car washes still running on the phone.",
   ctaDemo:"See the demo",ctaTalk:"Talk to us",
-  mTitle:"What a full agenda is worth per month",mSub:"estimate based on 3 bays, 8 working hours and a €14 average ticket",
+  mTitle:"What a full agenda is worth per month",mSub:"estimate based on 3 bays, 8 working hours and a €24 average ticket",
   mK1:"cars/day",mK2:"extras sold",mK3:"dead hours",
   s1H:"The problem isn't the price. It's the phone.",
   s1P:"A wash that does good work still loses clients to three things — and none is fixed by cutting prices.",
@@ -357,18 +360,18 @@ const T={
   b4t:"EV chargers",b4d:"Fundo Ambiental: 80% of the charger and the installation",
   b5t:"Hiring (IEM)",b5d:"support for new jobs when the second site opens",
   s5N:"<b>The app is the missing piece.</b> Applications don't fail for lack of will — they fail for lack of numbers. Six months of occupancy, refusals and average ticket beat any business plan written in a hurry.",
-  badge:"First 5 washes",per:"per month · fixed forever",
+  badge:"First 5 washes",per:"per month — only from the 25th online booking",
   i1:"Booking page with your services and hours",i2:"Day map and front-desk screen for whoever answers",
   i3:"Waiting list with automatic WhatsApp alerts",i4:"Tips for the team and Google reviews",
   i5:"Extras offered to the client during the wash",i6:"Daily report and data for funding applications",i7:"Alerts by WhatsApp, Telegram, SMS or a call — whichever the client prefers",
   ctaTry:"I want to try it",
-  priceN:"No installation, no long contract. Customer payments go straight to the wash's own account.",
+  priceN:"The €2 on each booking is paid by the customer — 25 bookings cover the subscription. Fewer than 25 in a month: you pay nothing. No installation, no long contract. Payments go straight to the wash's account.",
   who:"<b>Who builds it.</b> Igor Kartuzov, SeedWave — Madeira. I build tools that fill agendas and, once the numbers exist, I help turn them into a public funding application."},
 
  ru:{kick:"Nova Lavagem da Madeira",h1a:"Заполните расписание.",h1b:"Потом растите.",
   sub:"Онлайн-запись, лист ожидания в WhatsApp и допуслуги, которые продаются, пока машина уже у вас. Для моек, которые до сих пор работают по телефону.",
   ctaDemo:"Посмотреть демо",ctaTalk:"Связаться",
-  mTitle:"Сколько стоит полное расписание в месяц",mSub:"расчёт для 3 боксов, 8 рабочих часов и среднего чека 14 €",
+  mTitle:"Сколько стоит полное расписание в месяц",mSub:"расчёт для 3 боксов, 8 рабочих часов и среднего чека 24 €",
   mK1:"машин/день",mK2:"допуслуг продано",mK3:"мёртвых часов",
   s1H:"Проблема не в цене. Проблема в телефоне.",
   s1P:"Мойка, которая моет хорошо, теряет клиентов на трёх вещах — и ни одна не лечится снижением цены.",
@@ -397,18 +400,18 @@ const T={
   b4t:"Зарядки для электромобилей",b4d:"Fundo Ambiental: 80% станции и монтажа",
   b5t:"Найм (IEM)",b5d:"поддержка новых рабочих мест, когда откроется вторая точка",
   s5N:"<b>Приложение — недостающая деталь.</b> Заявки проваливаются не от нехватки желания, а от нехватки цифр. Шесть месяцев загрузки, отказов и среднего чека весят больше любого бизнес-плана, написанного наспех.",
-  badge:"Первым 5 мойкам",per:"в месяц · цена закрепляется навсегда",
+  badge:"Первым 5 мойкам",per:"в месяц — только с 25-й онлайн-брони",
   i1:"Страница записи с вашими услугами и часами",i2:"Карта дня и экран стойки для того, кто принимает звонки",
   i3:"Лист ожидания с автоматическим оповещением в WhatsApp",i4:"Чаевые команде и отзывы в Google",
   i5:"Допуслуги, предложенные клиенту во время мойки",i6:"Отчёт дня и данные для заявок на субсидии",i7:"Уведомления в WhatsApp, Telegram, SMS или звонком — как удобно клиенту",
   ctaTry:"Хочу попробовать",
-  priceN:"Без установки и долгого договора. Платежи клиентов идут напрямую на счёт мойки.",
+  priceN:"Эти 2 € с каждой брони платит клиент — 25 броней покрывают подписку. Меньше 25 за месяц — не платите ничего. Без установки и долгого договора. Платежи идут напрямую на счёт мойки.",
   who:"<b>Кто делает.</b> Игорь Картузов, SeedWave — Мадейра. Собираю инструменты, которые заполняют расписание, а когда появляются цифры — помогаю превратить их в заявку на господдержку."},
 
  es:{kick:"Nova Lavagem da Madeira",h1a:"Llene la agenda.",h1b:"Después crezca.",
   sub:"Reserva online, lista de espera por WhatsApp y extras vendidos mientras el coche ya está con usted.",
   ctaDemo:"Ver demo",ctaTalk:"Hablar con nosotros",
-  mTitle:"Lo que vale una agenda llena al mes",mSub:"estimación para 3 boxes, 8 horas y ticket medio de 14 €",
+  mTitle:"Lo que vale una agenda llena al mes",mSub:"estimación para 3 boxes, 8 horas y ticket medio de 24 €",
   mK1:"coches/día",mK2:"extras vendidos",mK3:"horas muertas",
   s1H:"El problema no es el precio. Es el teléfono.",
   s1P:"Un lavado que trabaja bien pierde clientes por tres cosas — y ninguna se arregla bajando el precio.",
@@ -437,18 +440,18 @@ const T={
   b4t:"Cargadores eléctricos",b4d:"Fundo Ambiental: 80% del poste y la instalación",
   b5t:"Contratación (IEM)",b5d:"apoyo a nuevos empleos cuando abra el segundo local",
   s5N:"<b>La app es la pieza que falta.</b> Las candidaturas no caen por falta de ganas: caen por falta de números.",
-  badge:"Primeros 5 lavados",per:"al mes · precio fijo para siempre",
+  badge:"Primeros 5 lavados",per:"al mes — solo desde la 25.ª reserva online",
   i1:"Página de reservas con sus servicios y horarios",i2:"Mapa del día y pantalla de mostrador",
   i3:"Lista de espera con aviso automático por WhatsApp",i4:"Propinas para el equipo y reseñas en Google",
   i5:"Extras propuestos al cliente durante el lavado",i6:"Informe del día y datos para candidaturas",i7:"Avisos por WhatsApp, Telegram, SMS o llamada — como prefiera el cliente",
   ctaTry:"Quiero probarlo",
-  priceN:"Sin instalación, sin contrato largo. Los pagos entran directamente en la cuenta del lavado.",
+  priceN:"Los 2 € de cada reserva los paga el cliente — 25 reservas cubren la suscripción. Menos de 25 en un mes: no paga nada. Los pagos entran directamente en la cuenta del lavado.",
   who:"<b>Quién lo hace.</b> Igor Kartuzov, SeedWave — Madeira. Construyo herramientas que llenan agendas y, cuando aparecen los números, ayudo a convertirlos en una candidatura a ayudas públicas."},
 
  de:{kick:"Nova Lavagem da Madeira",h1a:"Füllen Sie den Kalender.",h1b:"Dann wachsen Sie.",
   sub:"Onlinebuchung, WhatsApp-Warteliste und Zusatzleistungen, die verkauft werden, während das Auto schon bei Ihnen steht.",
   ctaDemo:"Demo ansehen",ctaTalk:"Kontakt",
-  mTitle:"Was ein voller Kalender im Monat wert ist",mSub:"Schätzung für 3 Boxen, 8 Stunden und 14 € Durchschnittsbon",
+  mTitle:"Was ein voller Kalender im Monat wert ist",mSub:"Schätzung für 3 Boxen, 8 Stunden und 24 € Durchschnittsbon",
   mK1:"Autos/Tag",mK2:"Extras verkauft",mK3:"tote Stunden",
   s1H:"Das Problem ist nicht der Preis. Es ist das Telefon.",
   s1P:"Eine Waschanlage, die gut arbeitet, verliert Kunden an drei Dinge — und keines davon löst ein niedrigerer Preis.",
@@ -477,12 +480,12 @@ const T={
   b4t:"E-Ladesäulen",b4d:"Fundo Ambiental: 80% der Säule und der Installation",
   b5t:"Einstellung (IEM)",b5d:"Förderung neuer Stellen, wenn der zweite Standort öffnet",
   s5N:"<b>Die App ist das fehlende Stück.</b> Anträge scheitern nicht am Willen, sondern an Zahlen.",
-  badge:"Erste 5 Waschanlagen",per:"pro Monat · Preis bleibt für immer",
+  badge:"Erste 5 Waschanlagen",per:"pro Monat — erst ab der 25. Onlinebuchung",
   i1:"Buchungsseite mit Ihren Leistungen und Zeiten",i2:"Tageskarte und Thekenbildschirm",
   i3:"Warteliste mit automatischer WhatsApp-Meldung",i4:"Trinkgeld fürs Team und Google-Bewertungen",
   i5:"Extras, die dem Kunden während der Wäsche angeboten werden",i6:"Tagesbericht und Daten für Förderanträge",i7:"Hinweise per WhatsApp, Telegram, SMS oder Anruf — wie der Kunde will",
   ctaTry:"Ich will es testen",
-  priceN:"Keine Installation, kein langer Vertrag. Kundenzahlungen gehen direkt auf das Konto der Waschanlage.",
+  priceN:"Die 2 € pro Buchung zahlt der Kunde — 25 Buchungen decken das Abo. Weniger als 25 im Monat: Sie zahlen nichts. Zahlungen gehen direkt auf das Konto der Waschanlage.",
   who:"<b>Wer es baut.</b> Igor Kartuzov, SeedWave — Madeira. Ich baue Werkzeuge, die Kalender füllen — und wenn die Zahlen da sind, helfe ich, daraus einen Förderantrag zu machen."}
 };
 
@@ -521,7 +524,7 @@ function render(){
 
 /* одометр */
 function animate(){
-  const target=8064, cars=24, extras=9, dead=3;
+  const target=13824, cars=24, extras=9, dead=3;
   const dur=1400, t0=performance.now();
   const fmt=n=>Math.round(n).toLocaleString('pt-PT').replace(/[,.]/g,' ')+' €';
   function step(now){
@@ -559,7 +562,7 @@ render();
 let reduce=false;
 try{reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
 if(reduce||typeof requestAnimationFrame==='undefined'){
-  $('#mVal').textContent='8 064 €';$('#m1').textContent='24';$('#m2').textContent='9';$('#m3').textContent='0';
+  $('#mVal').textContent='13 824 €';$('#m1').textContent='24';$('#m2').textContent='9';$('#m3').textContent='0';
 }else animate();
 </script>
 
